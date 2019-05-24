@@ -1,3 +1,33 @@
+// Challenge: Nth Smallest Number in a Stream
+
+// Many modern programming languages have the notion of a stream. A stream is a resource that's broken down and sent (usually over a network) in small chunks.
+
+// Imagine a video that's playing-- it would be inefficient to need to download an entire 1 gigabyte movie before being able to watch it. Instead, browsers will gradually download it in pieces.
+
+// Given a stream of numbers with an infinite length, can you find the nth smallest element at each point of the streaming? In the below example, we are looking for the second smallest element.
+
+// // stream is the resource, the "..." represents future integers
+
+// const stream = [3, 4, 5, 6, 7, ...]
+
+// nthSmallestNumber(2); // 2nd smallest number
+
+// // [null, 4, 4, 4, ...] (4 is always second smallest)
+
+// Let's use a for-loop to simulate a stream. Your method will be called as follows:
+
+// for (let i = 0; i < 10; i++) {
+
+//   const newInt = Math.floor(Math.random() * 10) + 1;
+
+//   nthSmallestNumber(n);
+
+//   // return nth smallest number
+
+// }
+
+// Solution: https://algodaily.com/challenges/nth-smallest-number-in-a-stream
+
 package main
 
 import (
