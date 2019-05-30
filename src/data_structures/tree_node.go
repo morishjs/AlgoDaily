@@ -37,3 +37,13 @@ func (treenode *TreeNode) Find(val int) bool {
 	
 	return false
 }
+
+func (treenode *TreeNode) InOrder() []int {
+	if treenode == nil {
+		return []int{}
+	} else if treenode.Left == nil && treenode.Right == nil {
+		return []int{treenode.Val}
+	} else {
+		return append(append(treenode.Left.InOrder(), treenode.Val), treenode.Right.InOrder()...)
+	}
+}

@@ -5,10 +5,10 @@
 // /***
 
 //   Input:
-//     5    
-//    / \     
+//     5
+//    / \
 //   3   8
-//  /        
+//  /
 // 1
 
 // ***/
@@ -33,29 +33,32 @@
 // twoSumFromBST(root, target);
 // // true because 3 + 8 = 11
 
+// Solution: https://algodaily.com/challenges/two-sum-from-bst
+
 package main
 
-import ds "go-algo-daily/src/data_structures";
+import (
+	. "go-algo-daily/src/data_structures"
+)
 
-func main()  {
-	root = ds.NewTreeNode(5, ds.NewTreeNode(3, ds.NewTreeNode(1)), ds.NewTreeNode(8))
+func twoSumFromBST(root *TreeNode, target int) bool {
+	sortedArr := root.InOrder()
 
-	target = 11
+	left, right := 0, len(sortedArr)-1
 
-	twoSumFromBST(root, target)
-}
+	for left < right {
+		twoSum := sortedArr[left] + sortedArr[right]
 
-func twoSumFromBST(root *ds.TreeNode, target int) {
-	if target - root.Val == 0 {
-		fmt.PrintF("We found it!")
-		return
+		if twoSum == target {
+			return true
+		}
+
+		if twoSum < target {
+			left += 1
+		} else {
+			right -= 1
+		}
 	}
 
-	rest := target - root.Val
-
-	if rest > root.Val {
-		twoSumFromBST(root.Right, rest)
-	} else {
-		twoSumFromBST(root.Left, rest)
-	}
+	return false
 }
