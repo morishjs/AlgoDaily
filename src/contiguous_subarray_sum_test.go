@@ -19,7 +19,7 @@ func Test_subarraySum(t *testing.T) {
 		},
 		{
 			"`sum` number exists",
-			args{[]int{1, 2, 3}, 3},
+			args{[]int{3, 2, 5, 1}, 6},
 			true,
 		},
 		{
