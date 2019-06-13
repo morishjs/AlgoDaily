@@ -50,6 +50,20 @@ func (list *List) ToArray() []int {
 	return arr
 }
 
+func (list *List) Contains(val int) bool {
+	listIter := list.root
+
+	for listIter != nil {
+		if listIter.Val == val {
+			return true
+		}
+
+		listIter = listIter.Next
+	}
+
+	return false
+}
+
 func (list *List) lazyInit() {
 	if list.root == nil {
 		list = list.Init()
