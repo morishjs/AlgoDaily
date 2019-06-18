@@ -1,7 +1,7 @@
 package ds
 
 type List struct {
-	root *ListNode
+	Root *ListNode
 	len int
 }
 
@@ -15,8 +15,8 @@ func (list *List) Prepend(val int) {
 
 	node := ListNode{}
 	node.Val = val
-	node.Next = list.root
-	list.root = &node
+	node.Next = list.Root
+	list.Root = &node
 	
 	list.len++
 }
@@ -24,9 +24,9 @@ func (list *List) Prepend(val int) {
 func (list *List) Append(val int) {
 	list.lazyInit()
 
-	listIterator := list.root
+	listIterator := list.Root
 	if listIterator == nil {
-		list.root = &ListNode{val, nil}
+		list.Root = &ListNode{val, nil}
 		return
 	}
 
@@ -41,7 +41,7 @@ func (list *List) Append(val int) {
 func (list *List) ToArray() []int {
 	arr := []int{}
 
-	listIterator := list.root
+	listIterator := list.Root
 	for listIterator != nil {
 		arr = append(arr, listIterator.Val)
 		listIterator = listIterator.Next
@@ -51,7 +51,7 @@ func (list *List) ToArray() []int {
 }
 
 func (list *List) Contains(val int) bool {
-	listIter := list.root
+	listIter := list.Root
 
 	for listIter != nil {
 		if listIter.Val == val {
@@ -65,7 +65,7 @@ func (list *List) Contains(val int) bool {
 }
 
 func (list *List) lazyInit() {
-	if list.root == nil {
+	if list.Root == nil {
 		list = list.Init()
 	}
 }
