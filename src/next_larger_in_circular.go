@@ -1,30 +1,26 @@
 package main
 
-import (
-	ds "go-algo-daily/src/data_structures"
-	"container/heap"
-)
+// A circular array is one where the next element of the last element is the first element:
 
-// An IntHeap is a min-heap of ints.
-type IntHeap []int
+// Instead of [1, 2, 3, 4], imagine the following, where after index 7, we'd move back to index 0.
 
-func (h IntHeap) Len() int           { return len(h) }
-func (h IntHeap) Less(i, j int) bool { return h[i] < h[j] }
-func (h IntHeap) Swap(i, j int)      { h[i], h[j] = h[j], h[i] }
+// Can you write a method nextLargerNumber(nums: array) to print the next immediate larger number for every element in the array? Note: for any element within the circular array, the next immediate larger number could be found circularly-- past the end and before it. If there is no number greater, return -1.
 
-func (h *IntHeap) Push(x interface{}) {
-	// Push and Pop use pointer receivers because they modify the slice's length,
-	// not just its contents.
-	*h = append(*h, x.(int))
-}
+// Take the following analysis for each index:
 
-func (h *IntHeap) Pop() interface{} {
-	old := *h
-	n := len(old)
-	x := old[n-1]
-	*h = old[0 : n-1]
-	return x
-}
+// nextLargerNumber([3, 1, 3, 4])
+
+// // [4, 3, 4, -1]
+
+// // 3's next greater is 4
+
+// // 1's next greater is 3
+
+// // 3's next greater is 4 again
+
+// // 4 will look to the beginning, but find nothing, so -1
+
+// solution: https://algodaily.com/challenges/next-larger-in-a-circular-array
 
 // args{[]int{3,1,3,4}},
 // []int{4,3,4,-1},
@@ -34,53 +30,25 @@ func nextLargerNumber(arr []int) []int {
 		return []int{}
 	}
 
-	numbers := []int{}
-	
-	list := newCircularList(arr)
-	
-	elem := list.Root
-	for {
-		h := &IntHeap{}
-		heap.Init(h)
+	result := []int{}
+	stack := []int{}
 
-		iter := elem.Next
-		
-		for elem != iter {
-			if elem.Val < iter.Val {
-				heap.Push(h, iter.Val)
-			}
+	for i := 0; i < len(arr); i++ {
+		result = append(result, -1)
+	}
 
-			iter = iter.Next
+	for i := 0; i < len(arr)*2; i++ {
+		currentValue := arr[i%len(arr)]
+
+		for len(stack) != 0 && arr[stack[len(stack)-1]] < currentValue {
+			result[stack[len(stack)-1]] = currentValue
+			stack = stack[:len(stack)-1]
 		}
 
-		if len(*h) == 0 {
-			numbers = append(numbers, -1)
-		} else {
-			numbers = append(numbers, heap.Pop(h).(int))
-		}
-
-		elem = elem.Next
-		if list.Root == elem {
-			break
+		if i < len(arr) {
+			stack = append(stack, i)
 		}
 	}
 
-	return numbers
-}
-
-func newCircularList(arr []int) *ds.List {
-	l := new(ds.List)
-
-	for _, v := range arr {
-		l.Append(v)
-	}
-
-	iter := l.Root
-	for iter.Next != nil {
-		iter = iter.Next
-	}
-
-	iter.Next = l.Root
-
-	return l
+	return result
 }

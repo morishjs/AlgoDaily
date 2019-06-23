@@ -29,6 +29,11 @@ func Test_nextLargerNumber(t *testing.T) {
 			args{[]int{1,2,3,4}},
 			[]int{2,3,4,-1},
 		},
+		{
+			"NextLargerNumber#4",
+			args{[]int{3,5,3,4}},
+			[]int{5,-1,4,5},
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
