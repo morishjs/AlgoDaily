@@ -35,7 +35,7 @@ package main
 func zerosToEnd(nums []int) []int {
 	var changeIndex int
 
-	for i,v := range nums {
+	for i, v := range nums {
 		if v == 0 {
 			changeIndex = i
 			break
@@ -47,7 +47,7 @@ func zerosToEnd(nums []int) []int {
 			nums[changeIndex] = v
 			nums[currentIndex] = 0
 
-			changeIndex += 1
+			changeIndex++
 		}
 	}
 

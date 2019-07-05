@@ -54,9 +54,9 @@ func twoSumFromBST(root *TreeNode, target int) bool {
 		}
 
 		if twoSum < target {
-			left += 1
+			left++
 		} else {
-			right -= 1
+			right--
 		}
 	}
 
