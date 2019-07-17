@@ -1,3 +1,5 @@
+module Main (main) where
+
 replicate' :: Int -> Int -> [Int]
 replicate' n x  
     | n <= 0    = []  
@@ -38,4 +40,5 @@ mergesort arr =
         sortedLeft = mergesort left
         sortedRight = mergesort right
     in merge sortedLeft sortedRight
-    
+
+main = do putStrLn "Hello World"
