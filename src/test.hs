@@ -41,4 +41,9 @@ mergesort arr =
         sortedRight = mergesort right
     in merge sortedLeft sortedRight
 
+fib :: (Ord a, Num a) => a -> a
+fib 0 = 0
+fib 1 = 1
+fib n = fib n-1 + fib n-2
+
 main = do putStrLn "Hello World"
